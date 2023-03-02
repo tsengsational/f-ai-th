@@ -16,7 +16,7 @@
                 </li>
             </ul>
         </div>
-        <button @click.prevent="submitPromp(textPrompt)">Generate</button>
+        <button @click.prevent="submitPrompt(textPrompt)">Generate</button>
     </form>
 </template>
 
