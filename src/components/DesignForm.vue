@@ -8,14 +8,19 @@
                 <option v-for="(room, index) in alphaRooms" :key="index">{{ room }}</option>
             </select>
         </div>
-        <div class="design-form__room-tags">
-            <ul class="design-form__room-tags-list">
-                <li class="design-form__room-tags-list-item" v-for="(tag, index) in tags" :key="index">
-                    <input type="checkbox" :name="tag" :value="tag" @change="toggleTag">
-                    <label :for="tag">{{ tag }}</label>
-                </li>
-            </ul>
-        </div>
+        <fieldset class="design-form__room-tags">
+            <legend class="design-form__room-tags-legend">Select your vibes:</legend>
+            <div class="design-form__room-tags-list">
+                <div class="design-form__room-tags-list-item" v-for="(tag, index) in tags" :key="index">
+                    <label :for="tag">
+                        <input type="checkbox" :name="tag" :value="tag" @change="toggleTag">
+                        <span>
+                           {{ tag }}
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </fieldset>
         <button @click.prevent="submitPrompt(textPrompt)">Generate</button>
     </form>
 </template>
@@ -68,3 +73,60 @@ export default {
     }
 }
 </script>
+
+<style>
+.design-form__room-text {
+    font-weight: bold;
+}
+
+.design-form__room-tags {
+    border: none;
+    margin: 2rem 0;
+}
+
+.design-form__room-tags-legend {
+    font-weight: bold;
+    text-align: left;
+}
+
+.design-form__room-tags-list-item label input {margin-right: 100px;}
+
+.design-form__room-tags-list-item {
+    margin: 4px;
+    background-color: #104068;
+    border-radius: 4px;
+    border: 1px solid #fff;
+    overflow: hidden;
+    float: left;
+}
+
+.design-form__room-tags-list-item label {
+    float: left; line-height: 3.0em;
+    width: 8.0em; height: 3.0em;
+}
+
+.design-form__room-tags-list-item label span {
+    text-align: center;
+    padding: 3px 0;
+    display: block;
+}
+
+.design-form__room-tags-list-item label input {
+    position: absolute;
+    display: none;
+    color: #fff !important;
+}
+
+.design-form__room-tags-list-item label input + span {
+    color: #fff;
+}
+
+.design-form__room-tags-list-item input:checked + span {
+    color: #ffffff;
+    text-shadow: 0 0  6px rgba(0, 0, 0, 0.8);
+}
+
+.action input:checked + span {
+    background-color: #F75A1B;
+}
+</style>
