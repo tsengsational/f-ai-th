@@ -2,16 +2,24 @@
   <div class="interior-desaign">
     <h2>Interior Des[AI]gn</h2>
     <DesignForm :submitPrompt="submitPrompt" />
+    <results-container :inspiration="inspiration" />
   </div>
 </template>
 
 <script>
 import DesignForm from './components/DesignForm.vue';
+import ResultsContainer from './components/ResultsContainer.vue';
 
 export default {
   name: 'App',
   components: {
-    DesignForm
+    DesignForm,
+    ResultsContainer
+  },
+  data() {
+    return {
+      inspiration: null
+    }
   },
   methods: {
     async submitPrompt(textPrompt) {
@@ -25,10 +33,13 @@ export default {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${process.env.VUE_APP_OPENAI_API_KEY}`
         },
-        body: payload
+        body: JSON.stringify(payload)
       })
-      return response.json();
+      let fulfilledResponse = response.json()
+      console.log(fulfilledResponse)
+      this.inspiration = fulfilledResponse.value.data[0].url
     }
   }
 }
