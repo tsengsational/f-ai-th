@@ -1,15 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="interior-desaign">
+    <h2>Interior Des[AI]gn</h2>
+    <DesignForm :submitPrompt="submitPrompt" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import DesignForm from './components/DesignForm.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    DesignForm
+  },
+  methods: {
+    async submitPrompt(payload) {
+      const response = await fetch('https://api.openai.com/v1/images/generations', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: payload
+      })
+      return response.json();
+    }
   }
 }
 </script>
