@@ -1,6 +1,6 @@
 <template>
   <div class="interior-desaign">
-    <h2>Interior Des[AI]gn</h2>
+    <h2 class="interior-desaign__title">Interior Des[AI]gn</h2>
     <DesignForm
       :submitPrompt="submitPrompt"
       @resetForm="resetForm" />
@@ -81,6 +81,11 @@ export default {
 </script>
 
 <style>
+.interior-desaign__title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 #app {
     background-color: #f0f7e3;
     font-family: Avenir, Helvetica, Arial, sans-serif;
