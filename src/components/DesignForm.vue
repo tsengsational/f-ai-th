@@ -11,12 +11,16 @@
         <div class="design-form__room-tags">
             <ul class="design-form__room-tags-list">
                 <li class="design-form__room-tags-list-item" v-for="(tag, index) in tags" :key="index">
-                    <input type="checkbox" :name="tag" :value="tag" @change="toggleTag" :checked="selectedTags.includes(tag)">
+                    <input type="checkbox" :name="tag" :value="tag" v-model="selectedTags">
                     <label :for="tag">{{ tag }}</label>
                 </li>
             </ul>
         </div>
-        <button @click.prevent="submitPrompt(textPrompt, selectedRoom, selectedTags)">Generate</button>
+        <button
+            @click.prevent="submitPrompt(textPrompt, selectedRoom, selectedTags)"
+            :disabled="isDisabled">
+            Generate
+        </button>
         <a href="#" @click.prevent="reset" >Reset</a>
     </form>
 </template>
@@ -41,6 +45,9 @@ export default {
         },
         alphaTags() {
             return this.alphaSort(this.tags)
+        },
+        isDisabled() {
+            return !this.selectedRoom;
         },
         textPrompt() {
             return `magazine spread photograph of a ${this.selectedRoom} with ${this.selectedTags.join(", ")} style, high def, atmospheric lighiting, dynamic lighting`
@@ -70,7 +77,7 @@ export default {
             } else {
                 this.selectedTags.push(tag);
             }
-        }
+        },
     }
 }
 </script>
