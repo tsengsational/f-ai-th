@@ -8,14 +8,17 @@
                 <option v-for="(room, index) in alphaRooms" :key="index">{{ room }}</option>
             </select>
         </div>
-        <div class="design-form__room-tags">
-            <ul class="design-form__room-tags-list">
-                <li class="design-form__room-tags-list-item" v-for="(tag, index) in tags" :key="index">
-                    <input type="checkbox" :name="tag" :value="tag" @change="toggleTag" :checked="selectedTags.includes(tag)">
-                    <label :for="tag">{{ tag }}</label>
-                </li>
-            </ul>
-        </div>
+        <fieldset class="design-form__room-tags">
+            <legend class="design-form__room-tags-legend">Select your vibes:</legend>
+            <div class="design-form__room-tags-list">
+                <div class="design-form__room-tags-list-item" v-for="(tag, index) in tags" :key="index">
+                    <label :for="tag">
+                        <input type="checkbox" :name="tag" :value="tag" @change="toggleTag" :checked="selectedTags.includes(tag)">
+                        <span>{{ tag }}</span>
+                    </label>
+                </div>
+            </div>
+        </fieldset>
         <button @click.prevent="submitPrompt(textPrompt, selectedRoom, selectedTags)">Generate</button>
         <a href="#" @click.prevent="reset" >Reset</a>
     </form>
