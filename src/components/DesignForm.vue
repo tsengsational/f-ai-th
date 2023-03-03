@@ -9,7 +9,7 @@
             </select>
         </div>
         <fieldset class="design-form__room-tags">
-            <legend class="design-form__room-tags-legend">Select your vibes:</legend>
+            <legend class="design-form__room-tags-legend">Select your styles:</legend>
             <div class="design-form__room-tags-list">
                 <div class="design-form__room-tags-list-item" v-for="(tag, index) in tags" :key="index">
                     <input type="checkbox" :name="tag" :value="tag" :id="tag" v-model="selectedTags">

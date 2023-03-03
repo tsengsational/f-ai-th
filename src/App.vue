@@ -53,6 +53,7 @@ export default {
       this.selectedRoom = null;
       this.selectedTags = null;
       this.inspiration = null;
+      this.submitted = null;
     },
     async submitPrompt(textPrompt, selectedRoom, selectedTags) {
       const payload = {
@@ -89,6 +90,6 @@ export default {
     color: #2c3e50;
     margin: 60px auto;
     max-width: 50rem;
-    padding: 2rem;
+    padding: 2rem 0;
 }
 </style>
