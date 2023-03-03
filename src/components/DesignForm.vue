@@ -9,7 +9,7 @@
             </select>
         </div>
         <fieldset class="design-form__room-tags">
-            <legend class="design-form__room-tags-legend">Select your vibes:</legend>
+            <legend class="design-form__room-tags-legend">Select your mood:</legend>
             <div class="design-form__room-tags-list">
                 <div class="design-form__room-tags-list-item" v-for="(tag, index) in tags" :key="index">
                     <input type="checkbox" :name="tag" :value="tag" :id="tag" v-model="selectedTags">
@@ -105,15 +105,12 @@
         text-align: left;
     }
 
-    .design-form__room-tags-list-item label input {
-        margin-right: 100px;
-    }
-
     .design-form__room-tags-list-item {
         margin: 4px;
-        background-color: #104068;
+        background-color: #dcde7d;
+        color: #000;
+        font-weight: bold;
         border-radius: 4px;
-        border: 1px solid #fff;
         overflow: hidden;
         float: left;
     }
@@ -126,7 +123,7 @@
     }
 
     .design-form__room-tags-list-item input:checked + label {
-        background-color: blue;
+        background-color: #a8de7d;
     }
 
     .design-form__room-tags-list-item label span {
@@ -136,12 +133,7 @@
     }
 
     .design-form__room-tags-list-item label input + span {
-        color: #fff;
-    }
-
-    .design-form__room-tags-list-item input:checked + span {
-        color: #ffffff;
-        text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+        color: #000;
     }
 
     .design-form__room-tags-list-item input {
@@ -154,19 +146,6 @@
         width: 1px;
     }
 
-    .design-form__room-tags-list-item label span {
-        color: #fff;
-    }
-
-    .design-form__room-tags-list-item input:checked span {
-        color: #ffffff;
-        text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
-    }
-
-    .design-form__room-tags-list-item input:checked + span {
-        background-color: #F75A1B;
-    }
-
     .design-form__button-wrapper {
         text-align: center;
     }
@@ -176,6 +155,7 @@
         color: #FFF;
         font-weight: bold;
         padding: .5rem 2rem;
+        text-transform: uppercase;
     }
 
     .design-form__button-reset-wrapper {
