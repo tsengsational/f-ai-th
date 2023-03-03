@@ -12,8 +12,8 @@
             <legend class="design-form__room-tags-legend">Select your vibes:</legend>
             <div class="design-form__room-tags-list">
                 <div class="design-form__room-tags-list-item" v-for="(tag, index) in tags" :key="index">
+                    <input type="checkbox" :name="tag" :value="tag" :id="tag" v-model="selectedTags">
                     <label :for="tag">
-                        <input type="checkbox" :name="tag" :value="tag" v-model="selectedTags">
                         <span>{{ tag }}</span>
                     </label>
                 </div>
@@ -111,6 +111,10 @@ export default {
     float: left;
 }
 
+.design-form__room-tags-list-item input:checked + label {
+    background-color: blue;
+}
+
 .design-form__room-tags-list-item label {
     float: left; line-height: 3.0em;
     width: 8.0em; height: 3.0em;
@@ -122,7 +126,7 @@ export default {
     display: block;
 }
 
-.design-form__room-tags-list-item label input {
+.design-form__room-tags-list-item input {
     clip: rect(0 0 0 0);
     clip-path: inset(50%);
     height: 1px;
@@ -132,11 +136,11 @@ export default {
     width: 1px;
 }
 
-.design-form__room-tags-list-item label input + span {
+.design-form__room-tags-list-item label span {
     color: #fff;
 }
 
-.design-form__room-tags-list-item input:checked + span {
+.design-form__room-tags-list-item input:checked span {
     color: #ffffff;
     text-shadow: 0 0  6px rgba(0, 0, 0, 0.8);
 }
