@@ -13,7 +13,12 @@
             <div class="design-form__room-tags-list">
                 <div class="design-form__room-tags-list-item" v-for="(tag, index) in tags" :key="index">
                     <label :for="tag">
-                        <input type="checkbox" :name="tag" :value="tag" @change="toggleTag">
+                        <input
+                            type="checkbox"
+                            :name="tag"
+                            :value="tag"
+                            :checked="checked"
+                            @change="toggleTag">
                         <span>
                            {{ tag }}
                         </span>
@@ -112,9 +117,13 @@ export default {
 }
 
 .design-form__room-tags-list-item label input {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
     position: absolute;
-    display: none;
-    color: #fff !important;
+    white-space: nowrap;
+    width: 1px;
 }
 
 .design-form__room-tags-list-item label input + span {
