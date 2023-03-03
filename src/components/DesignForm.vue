@@ -153,4 +153,20 @@ export default {
     .design-form__button-wrapper {
         text-align: center;
     }
+
+    .design-form__button-submit {
+        background-color: #5bad4d;
+        color: #FFF;
+        font-weight: bold;
+        padding: .5rem 2rem;
+    }
+
+    .design-form__button-reset-wrapper {
+        margin-top: 1rem;
+    }
+
+    .design-form__button-reset {
+        color: #000;
+        font-weight: bold;
+    }
 </style>
