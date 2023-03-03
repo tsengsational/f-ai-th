@@ -1,8 +1,16 @@
 <template>
   <div class="interior-desaign">
     <h2>Interior Des[AI]gn</h2>
-    <DesignForm :submitPrompt="submitPrompt" />
-    <results-container :inspirationUrl="inspirationUrl" />
+    <DesignForm
+      :submitPrompt="submitPrompt"
+      @resetForm="resetForm" />
+    <results-container
+      v-show="submitted"
+      :inspirationUrl="inspirationUrl"
+      :loaded="loaded"
+      :loading="loading"
+      :selectedRoom="selectedRoom"
+      :selectedTags="selectedTags" />
   </div>
 </template>
 
@@ -18,7 +26,10 @@ export default {
   },
   data() {
     return {
-      inspiration: null
+      inspiration: null,
+      submitted: false,
+      selectedRoom: null,
+      selectedTags: null
     }
   },
   computed: {
@@ -29,15 +40,29 @@ export default {
       else {
         return ""
       }
+    },
+    loading() {
+      return this.submitted && !this.inspiration;
+    },
+    loaded() {
+      return this.submitted && this.inspirationUrl.length > 1;
     }
   },
   methods: {
-    async submitPrompt(textPrompt) {
+    resetForm() {
+      this.selectedRoom = null;
+      this.selectedTags = null;
+      this.inspiration = null;
+    },
+    async submitPrompt(textPrompt, selectedRoom, selectedTags) {
       const payload = {
         prompt: textPrompt,
         n: 1,
         size: "512x512"
       }
+      this.selectedRoom = selectedRoom;
+      this.selectedTags = selectedTags;
+      this.submitted = true;
 
       const response = await fetch('https://api.openai.com/v1/images/generations', {
         method: "POST",
@@ -49,7 +74,6 @@ export default {
       })
       let fulfilledResponse = await response.json()
       this.inspiration = await fulfilledResponse
-      console.log(this.inspiration)
     }
   }
 }
