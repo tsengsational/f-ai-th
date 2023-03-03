@@ -1,7 +1,7 @@
 <template>
     <div class="results-container">
         <div class="results-image">
-            <img :src="inspiration" >
+            <img :src="inspirationUrl" >
         </div>
     </div>
 </template>
@@ -10,7 +10,7 @@
 
 export default {
     name: "ResultsContainer",
-    props: ["inspiration"]
+    props: ["inspirationUrl"]
 }
 </script>
 

@@ -2,7 +2,7 @@
   <div class="interior-desaign">
     <h2>Interior Des[AI]gn</h2>
     <DesignForm :submitPrompt="submitPrompt" />
-    <results-container :inspiration="inspiration" />
+    <results-container :inspirationUrl="inspirationUrl" />
   </div>
 </template>
 
@@ -21,6 +21,16 @@ export default {
       inspiration: null
     }
   },
+  computed: {
+    inspirationUrl() {
+      if (this.inspiration) {
+        return this.inspiration.data[0].url
+      }
+      else {
+        return ""
+      }
+    }
+  },
   methods: {
     async submitPrompt(textPrompt) {
       const payload = {
@@ -37,9 +47,9 @@ export default {
         },
         body: JSON.stringify(payload)
       })
-      let fulfilledResponse = response.json()
-      console.log(fulfilledResponse)
-      this.inspiration = fulfilledResponse.value.data[0].url
+      let fulfilledResponse = await response.json()
+      this.inspiration = await fulfilledResponse
+      console.log(this.inspiration)
     }
   }
 }
