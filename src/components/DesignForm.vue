@@ -110,7 +110,7 @@
         background-color: #dcde7d;
         color: #000;
         font-weight: bold;
-        border-radius: 4px;
+        border-radius: 8px;
         overflow: hidden;
         float: left;
     }
@@ -122,8 +122,16 @@
         height: 3.0em;
     }
 
+    .design-form__room-tags-list-item input + label:hover {
+        background-color: #a8de7d;
+    }
+
     .design-form__room-tags-list-item input:checked + label {
         background-color: #a8de7d;
+    }
+
+    .design-form__room-tags-list-item input:checked + label:hover {
+        background-color: #72c068;
     }
 
     .design-form__room-tags-list-item label span {
@@ -132,8 +140,8 @@
         display: block;
     }
 
-    .design-form__room-tags-list-item label input + span {
-        color: #000;
+    .design-form__room-tags-list-item label span {
+
     }
 
     .design-form__room-tags-list-item input {
@@ -152,6 +160,8 @@
 
     .design-form__button-submit {
         background-color: #5bad4d;
+        border-radius: 4px;
+        border: none;
         color: #FFF;
         font-weight: bold;
         padding: .5rem 2rem;
