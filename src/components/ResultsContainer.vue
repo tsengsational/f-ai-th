@@ -1,5 +1,6 @@
 <template>
     <div class="results-container" >
+        <h2 class="results-container__title">Your Inspiration:</h2>
         <div v-show="loading" class="spinner">
             Generating...
         </div>
@@ -24,4 +25,16 @@ export default {
     }
 }
 </script>
+
+<style>
+
+.results-container {
+    padding: 3rem 0 0;
+
+}
+
+.results-container__title {
+    margin-bottom: 2rem;
+}
+</style>
 

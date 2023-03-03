@@ -1,6 +1,6 @@
 <template>
   <div class="interior-desaign">
-    <h2>Interior Des[AI]gn</h2>
+    <h2 class="interior-desaign__title">Interior Des[AI]gn</h2>
     <DesignForm
       :submitPrompt="submitPrompt"
       @resetForm="resetForm" />
@@ -53,6 +53,7 @@ export default {
       this.selectedRoom = null;
       this.selectedTags = null;
       this.inspiration = null;
+      this.submitted = null;
     },
     async submitPrompt(textPrompt, selectedRoom, selectedTags) {
       const payload = {
@@ -80,12 +81,20 @@ export default {
 </script>
 
 <style>
+.interior-desaign__title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    background-color: #f0f7e3;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin: 60px auto;
+    max-width: 50rem;
+    padding: 2rem 0;
 }
 </style>
