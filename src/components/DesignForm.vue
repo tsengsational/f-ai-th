@@ -4,8 +4,8 @@
             <span class="design-form__room-text">
                 I'm designing a
             </span>
-            <select v-model="selectedRoom">
-                <option v-for="(room, index) in alphaRooms" :key="index">{{room}}</option>
+            <select v-model="selectedType">
+                <option v-for="(room, index) in alphatype" :key="index">{{room}}</option>
             </select>
         </div>
         <fieldset class="design-form__room-tags">
@@ -22,7 +22,7 @@
         <div class="design-form__button-wrapper">
             <button
                 class="design-form__button-submit"
-                @click.prevent="submitPrompt(textPrompt, selectedRoom, selectedTags)"
+                @click.prevent="submitPrompt(textPrompt, selectedType, selectedTags)"
                 :disabled="isDisabled">
                 Generate
             </button>
@@ -40,25 +40,25 @@
         props: ["submitPrompt"],
         data() {
             return {
-                rooms: ["Kitchen", "Living Room", "Bed Room", "Study", "Bath Room", "Dining Room", "Entry Way", "Teen Girls Room", "Teen Boys Room", "Kids Room", "Nursery", "Home Office", "Home Library", "Balcony", "Patio", "Vanity Room"],
-                tags: ["Bohemian", "Concrete", "Minimalist", "Maximalist", "Midcentury", "Grandmillennial", "Traditional", "Japandi", "Scandinavian", "European", "Mediterranian", "Victorian", "Serious", "Playful", "Vibrant", "Organic", "Farmhouse", "Classic", "Luxurious", "Japanese", "Feng Shui", "Vintage", "Contemporary", "Industrial", "Monochromatic"],
-                selectedRoom: null,
+                type: ["Chocolate", "Pastry", "Cake", "Drink", "Hard Candy", "Caramel", "Nougat", "Cookie", "Chip", "Pretzel", "Nuts", "Fruit"],
+                tags: ["Sugar-coated", "Crisp", "Light", "Heavy", "Sour", "Bright", "Creamy", "Buttery", "Firey", "Icey"],
+                selectedType: null,
                 selectedTags: [],
                 prompt: null
             }
         },
         computed: {
-            alphaRooms() {
-                return this.alphaSort(this.rooms)
+            alphaType() {
+                return this.alphaSort(this.type)
             },
             alphaTags() {
                 return this.alphaSort(this.tags)
             },
             isDisabled() {
-                return !this.selectedRoom;
+                return !this.selectedType;
             },
             textPrompt() {
-                return `magazine spread photograph of a ${this.selectedRoom} with ${this.selectedTags.join(", ")} style, high def, atmospheric lighiting, dynamic lighting`
+                return `magazine spread photograph of a ${this.selectedType} snack food with ${this.selectedTags.join(", ")} style, high def, atmospheric lighiting, dynamic lighting`
             }
         },
         methods: {
@@ -74,7 +74,7 @@
                 })
             },
             reset() {
-                this.selectedRoom = null;
+                this.selectedType = null;
                 this.selectedTags = []
                 this.$emit('resetForm')
             },

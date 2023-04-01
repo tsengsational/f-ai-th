@@ -1,4 +1,4 @@
-# interior-desaign
+# ai-vendy
 
 ## Project setup
 ```
