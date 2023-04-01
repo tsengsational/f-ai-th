@@ -1,6 +1,6 @@
 <template>
   <div class="interior-desaign">
-    <h2 class="interior-desaign__title">Interior Des[AI]gn</h2>
+    <h2 class="interior-desaign__title">AI Vendy</h2>
     <DesignForm
       :submitPrompt="submitPrompt"
       @resetForm="resetForm" />
@@ -9,7 +9,7 @@
       :inspirationUrl="inspirationUrl"
       :loaded="loaded"
       :loading="loading"
-      :selectedRoom="selectedRoom"
+      :selectedType="selectedType"
       :selectedTags="selectedTags" />
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
     return {
       inspiration: null,
       submitted: false,
-      selectedRoom: null,
+      selectedType: null,
       selectedTags: null
     }
   },
@@ -50,18 +50,18 @@ export default {
   },
   methods: {
     resetForm() {
-      this.selectedRoom = null;
+      this.selectedType = null;
       this.selectedTags = null;
       this.inspiration = null;
       this.submitted = null;
     },
-    async submitPrompt(textPrompt, selectedRoom, selectedTags) {
+    async submitPrompt(textPrompt, selectedType, selectedTags) {
       const payload = {
         prompt: textPrompt,
         n: 1,
         size: "512x512"
       }
-      this.selectedRoom = selectedRoom;
+      this.selectedType = selectedType;
       this.selectedTags = selectedTags;
       this.submitted = true;
 

@@ -2,10 +2,10 @@
     <form class="design-form">
         <div class="design-form__room-type">
             <span class="design-form__room-text">
-                I'm designing a
+                I want a
             </span>
             <select v-model="selectedType">
-                <option v-for="(room, index) in alphatype" :key="index">{{room}}</option>
+                <option v-for="(type, index) in alphaType" :key="index">{{type}}</option>
             </select>
         </div>
         <fieldset class="design-form__room-tags">
@@ -41,7 +41,7 @@
         data() {
             return {
                 type: ["Chocolate", "Pastry", "Cake", "Drink", "Hard Candy", "Caramel", "Nougat", "Cookie", "Chip", "Pretzel", "Nuts", "Fruit"],
-                tags: ["Sugar-coated", "Crisp", "Light", "Heavy", "Sour", "Bright", "Creamy", "Buttery", "Firey", "Icey"],
+                tags: ["Sugar-coated", "Choco-coated", "Crispy", "Light", "Heavy", "Sour", "Bright", "Creamy", "Buttery", "Firey", "Icey", "Red", "Blue", "Green", "Yellow", "Pink", "Strawberry", "Raspberry", "Blueberry", "Minty", "Lemony"],
                 selectedType: null,
                 selectedTags: [],
                 prompt: null
@@ -58,7 +58,7 @@
                 return !this.selectedType;
             },
             textPrompt() {
-                return `magazine spread photograph of a ${this.selectedType} snack food with ${this.selectedTags.join(", ")} style, high def, atmospheric lighiting, dynamic lighting`
+                return `high definition photograph of a ${this.selectedType} snack food with ${this.selectedTags.join(", ")} style, high def, atmospheric lighiting, dynamic lighting`
             }
         },
         methods: {
