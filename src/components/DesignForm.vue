@@ -116,16 +116,28 @@
 
     .design-form__room-tags-list {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+
+    }
+    @media (min-width: 50em) {
+        .design-form__room-tags-list {
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        }
     }
 
     .design-form__room-tags-list-item label {
         line-height: 3.0em;
-        width: 8.0em;
+        width: 100%;
         height: 3.0em;
         background-color: #dcde7d;
         display: inline-block;
 
+    }
+
+    @media (min-width: 50em) {
+        .design-form__room-tags-list-item label {
+            width: 8em
+        }
     }
 
     .design-form__room-tags-list-item input + label:hover {

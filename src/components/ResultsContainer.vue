@@ -18,11 +18,21 @@ export default {
 <style>
 .results-container {
     padding: 3rem 0 0;
-
 }
 
 .results-container__title {
     margin-bottom: 2rem;
+}
+
+.results-image img {
+    width: 100%;
+
+}
+
+@media (min-width: 50em) {
+    .results-image img {
+        width: 32rem;
+    }
 }
 
 .spinner {
