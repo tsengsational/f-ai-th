@@ -1,6 +1,6 @@
 <template>
-  <div class="interior-desaign">
-    <h2 class="interior-desaign__title">F(AI)TH</h2>
+  <div class="faith">
+    <h2 class="faith__title">F(AI)TH</h2>
     <DesignForm
       :submitPrompt="submitPrompt"
       @resetForm="resetForm" />
@@ -85,7 +85,7 @@ export default {
 </script>
 
 <style>
-.interior-desaign__title {
+.faith__title {
   font-size: 2rem;
   font-weight: bold;
 }

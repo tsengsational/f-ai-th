@@ -1,23 +1,23 @@
 <template>
-    <form class="design-form">
-        <div class="design-form__name">
-            <span class="design-form__name-text">
+    <form class="prayer-form">
+        <div class="prayer-form__name">
+            <span class="prayer-form__name-text">
                 Who this prayer is for:
             </span>
-            <input v-model="name" class="design-form__name-input">
+            <input v-model="name" class="prayer-form__name-input" placeholder="OPTIONAL: Your name">
         </div>
-        <div class="design-form__room-type">
-            <span class="design-form__room-text">
-                I want a prayer for
+        <div class="prayer-form__room-type">
+            <span class="prayer-form__room-text">
+                I want a prayer for (required):
             </span>
             <select v-model="selectedType">
                 <option v-for="(type, index) in alphaType" :key="index">{{type}}</option>
             </select>
         </div>
-        <fieldset class="design-form__room-tags">
-            <legend class="design-form__room-tags-legend">Select your moods:</legend>
-            <div class="design-form__room-tags-list">
-                <div class="design-form__room-tags-list-item" v-for="(tag, index) in tags" :key="index">
+        <fieldset class="prayer-form__room-tags">
+            <legend class="prayer-form__room-tags-legend">Select your moods:</legend>
+            <div class="prayer-form__room-tags-list">
+                <div class="prayer-form__room-tags-list-item" v-for="(tag, index) in tags" :key="index">
                     <input type="checkbox" :name="tag" :value="tag" :id="tag" v-model="selectedTags">
                     <label :for="tag">
                         <span>{{tag}}</span>
@@ -25,19 +25,19 @@
                 </div>
             </div>
         </fieldset>
-        <div class="design-form__user-input">
+        <div class="prayer-form__user-input">
             <span class="deisgn-form__user-text">Additional information:</span>
-            <textarea v-model="userInput"></textarea>
+            <textarea v-model="userInput" placeholder="OPTIONAL"></textarea>
         </div>
-        <div class="design-form__button-wrapper">
+        <div class="prayer-form__button-wrapper">
             <button
-                class="design-form__button-submit"
+                class="prayer-form__button-submit"
                 @click.prevent="submitPrompt(textPrompt, name, selectedType, selectedTags, userInput)"
                 :disabled="isDisabled">
                 Generate
             </button>
-            <div class="design-form__button-reset-wrapper">
-                <a href="#" @click.prevent="reset" class="design-form__button-reset">Reset</a>
+            <div class="prayer-form__button-reset-wrapper">
+                <a href="#" @click.prevent="reset" class="prayer-form__button-reset">Reset</a>
             </div>
         </div>
     </form>
@@ -46,7 +46,7 @@
 <script>
 
     export default {
-        name: "DesignForm",
+        name: "PrayerForm",
         props: ["submitPrompt"],
         data() {
             return {
@@ -87,7 +87,7 @@
                 return !this.selectedType;
             },
             textPrompt() {
-                let prompt = `I would like you to write a humanist prayer that is 2 paragraphs long. It should not be overtly religious, nor should it use any explicit religious terminology like God, Buddha, Allah, etc. but should be generically spiritual. This prayer should affirm the reader in their innate value and that they are loved and cared for by the universe.This prayer should be addressed to The Universe and be for a person named ${this.name}. It should be a prayer of ${this.selectedType} with the following qualities: ${this.selectedTags.join(", ")}.`
+                let prompt = `I would like you to write a humanist prayer that is 2 paragraphs long. It should not be overtly religious, nor should it use any explicit religious terminology like God, Buddha, Allah, etc. but should be generically spiritual. This prayer should affirm the reader in their innate value and that they are loved and cared for by the universe. This prayer should be addressed to The Universe ${this.name.length > 0 ? " and be written for a person named " + this.name : ""}. It should be a prayer of ${this.selectedType} with the following qualities: ${this.selectedTags.join(", ")}.`
 
                 if (this.userInput) {
                     prompt += ` Here is additional context for the prayer: ${this.userInput}`;
@@ -128,24 +128,24 @@
 </script>
 
 <style>
-    .design-form__name {
+    .prayer-form__name {
         margin-bottom: 1rem;
     }
-    .design-form__room-text {
+    .prayer-form__room-text {
         font-weight: bold;
     }
 
-    .design-form__room-tags {
+    .prayer-form__room-tags {
         border: none;
         margin: 2rem 0;
     }
 
-    .design-form__room-tags-legend {
+    .prayer-form__room-tags-legend {
         font-weight: bold;
         text-align: left;
     }
 
-    .design-form__room-tags-list-item {
+    .prayer-form__room-tags-list-item {
         margin: 4px;
         color: #000;
         font-weight: bold;
@@ -154,18 +154,18 @@
         float: left;
     }
 
-    .design-form__room-tags-list {
+    .prayer-form__room-tags-list {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
 
     }
     @media (min-width: 50em) {
-        .design-form__room-tags-list {
+        .prayer-form__room-tags-list {
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         }
     }
 
-    .design-form__room-tags-list-item label {
+    .prayer-form__room-tags-list-item label {
         line-height: 3.0em;
         width: 100%;
         height: 3.0em;
@@ -175,30 +175,30 @@
     }
 
     @media (min-width: 50em) {
-        .design-form__room-tags-list-item label {
+        .prayer-form__room-tags-list-item label {
             width: 8em
         }
     }
 
-    .design-form__room-tags-list-item input + label:hover {
+    .prayer-form__room-tags-list-item input + label:hover {
         background-color: #a8de7d;
     }
 
-    .design-form__room-tags-list-item input:checked + label {
+    .prayer-form__room-tags-list-item input:checked + label {
         background-color: #a8de7d;
     }
 
-    .design-form__room-tags-list-item input:checked + label:hover {
+    .prayer-form__room-tags-list-item input:checked + label:hover {
         background-color: #72c068;
     }
 
-    .design-form__room-tags-list-item label span {
+    .prayer-form__room-tags-list-item label span {
         text-align: center;
         padding: 3px 0;
         display: block;
     }
 
-    .design-form__room-tags-list-item input {
+    .prayer-form__room-tags-list-item input {
         clip: rect(0 0 0 0);
         clip-path: inset(50%);
         height: 1px;
@@ -208,21 +208,24 @@
         width: 1px;
     }
 
-    .design-form__user-input {
+    .prayer-form__user-input {
         display: flex;
         flex-direction: column;
         padding: 0 2rem 2rem;
     }
 
-    .design-form__user-input textarea {
+    .prayer-form__user-input textarea {
         display: block;
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
-    .design-form__button-wrapper {
+    .prayer-form__button-wrapper {
         text-align: center;
     }
 
-    .design-form__button-submit {
+    .prayer-form__button-submit {
         background-color: #5bad4d;
         border-radius: 4px;
         border: none;
@@ -234,27 +237,27 @@
         cursor: pointer;
     }
 
-    .design-form__button-submit:hover {
+    .prayer-form__button-submit:hover {
         background-color: #348425;
         transition: background-color .3s;
     }
 
-    .design-form__button-submit:disabled {
+    .prayer-form__button-submit:disabled {
         background-color:#aaaaaa;
         color: #2c3e50;
         cursor: auto;
     }
 
-    .design-form__button-reset-wrapper {
+    .prayer-form__button-reset-wrapper {
         margin-top: 1rem;
     }
 
-    .design-form__button-reset {
+    .prayer-form__button-reset {
         color: #000;
         font-weight: bold;
     }
 
-    .design-form__button-reset-wrapper {
+    .prayer-form__button-reset-wrapper {
         text-align: right;
         padding-right: 2rem;
     }
