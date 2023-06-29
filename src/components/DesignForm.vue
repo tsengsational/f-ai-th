@@ -1,8 +1,14 @@
 <template>
     <form class="design-form">
+        <div class="design-form__name">
+            <span class="design-form__name-text">
+                Who this prayer is for:
+            </span>
+            <input v-model="name" class="design-form__name-input">
+        </div>
         <div class="design-form__room-type">
             <span class="design-form__room-text">
-                I want a
+                I want a prayer for
             </span>
             <select v-model="selectedType">
                 <option v-for="(type, index) in alphaType" :key="index">{{type}}</option>
@@ -19,10 +25,14 @@
                 </div>
             </div>
         </fieldset>
+        <div class="design-form__user-input">
+            <span class="deisgn-form__user-text">Additional information:</span>
+            <textarea v-model="userInput"></textarea>
+        </div>
         <div class="design-form__button-wrapper">
             <button
                 class="design-form__button-submit"
-                @click.prevent="submitPrompt(textPrompt, selectedType, selectedTags)"
+                @click.prevent="submitPrompt(textPrompt, name, selectedType, selectedTags, userInput)"
                 :disabled="isDisabled">
                 Generate
             </button>
@@ -40,11 +50,30 @@
         props: ["submitPrompt"],
         data() {
             return {
-                type: ["Chocolate", "Pastry", "Cake", "Drink", "Hard Candy", "Caramel", "Nougat", "Cookie", "Chip", "Pretzel", "Nuts", "Fruit"],
-                tags: ["Sugar-coated", "Choco-coated", "Crispy", "Light", "Heavy", "Sour", "Bright", "Creamy", "Buttery", "Firey", "Icey", "Red", "Blue", "Green", "Yellow", "Pink", "Strawberry", "Raspberry", "Blueberry", "Minty", "Lemony"],
+                type: ["Affirmation", "Absolution", "Thanksgiving", "Adoration", "Intercession", "Supplication", "Guidance", "Prophetic", "Fellowship"],
+                tags: [
+                    "contemplative",
+                    "meditative",
+                    "reflective",
+                    "confessional",
+                    "grateful",
+                    "praise-filled",
+                    "surrendering",
+                    "penitent",
+                    "repentant",
+                    "devotional",
+                    "reverent",
+                    "joyful",
+                    "healing",
+                    "spiritual",
+                    "poetic",
+                    "metaphorical"
+                ],
+                name: "",
                 selectedType: null,
                 selectedTags: [],
-                prompt: null
+                prompt: null,
+                userInput: ""
             }
         },
         computed: {
@@ -58,7 +87,13 @@
                 return !this.selectedType;
             },
             textPrompt() {
-                return `high definition photograph of a ${this.selectedType} snack food with ${this.selectedTags.join(", ")} style, high def, atmospheric lighiting, dynamic lighting`
+                let prompt = `I would like you to write a humanist prayer that is 2 paragraphs long. It should not be overtly religious, nor should it use any explicit religious terminology like God, Buddha, Allah, etc. but should be generically spiritual. This prayer should affirm the reader in their innate value and that they are loved and cared for by the universe.This prayer should be addressed to The Universe and be for a person named ${this.name}. It should be a prayer of ${this.selectedType} with the following qualities: ${this.selectedTags.join(", ")}.`
+
+                if (this.userInput) {
+                    prompt += ` Here is additional context for the prayer: ${this.userInput}`;
+                }
+
+                return prompt;
             }
         },
         methods: {
@@ -75,7 +110,9 @@
             },
             reset() {
                 this.selectedType = null;
-                this.selectedTags = []
+                this.selectedTags = [];
+                this.userInput = "";
+                this.name = "";
                 this.$emit('resetForm')
             },
             toggleTag(event) {
@@ -91,6 +128,9 @@
 </script>
 
 <style>
+    .design-form__name {
+        margin-bottom: 1rem;
+    }
     .design-form__room-text {
         font-weight: bold;
     }
@@ -166,6 +206,16 @@
         position: absolute;
         white-space: nowrap;
         width: 1px;
+    }
+
+    .design-form__user-input {
+        display: flex;
+        flex-direction: column;
+        padding: 0 2rem 2rem;
+    }
+
+    .design-form__user-input textarea {
+        display: block;
     }
 
     .design-form__button-wrapper {

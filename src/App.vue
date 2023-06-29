@@ -1,12 +1,12 @@
 <template>
   <div class="interior-desaign">
-    <h2 class="interior-desaign__title">AI Vendy</h2>
+    <h2 class="interior-desaign__title">F(AI)TH</h2>
     <DesignForm
       :submitPrompt="submitPrompt"
       @resetForm="resetForm" />
     <results-container
       v-show="submitted"
-      :inspirationUrl="inspirationUrl"
+      :inspirationText="inspirationText"
       :loaded="loaded"
       :loading="loading"
       :selectedType="selectedType"
@@ -33,9 +33,9 @@ export default {
     }
   },
   computed: {
-    inspirationUrl() {
+    inspirationText() {
       if (this.inspiration) {
-        return this.inspiration.data[0].url
+        return this.inspiration.choices[0].text
       }
       else {
         return ""
@@ -45,7 +45,7 @@ export default {
       return this.submitted && !this.inspiration;
     },
     loaded() {
-      return this.submitted && this.inspirationUrl.length > 1;
+      return this.submitted && this.inspirationText.length > 1;
     }
   },
   methods: {
@@ -55,17 +55,21 @@ export default {
       this.inspiration = null;
       this.submitted = null;
     },
-    async submitPrompt(textPrompt, selectedType, selectedTags) {
+    async submitPrompt(textPrompt, name, selectedType, selectedTags, userInput) {
       const payload = {
+        model: "text-davinci-003",
         prompt: textPrompt,
+        max_tokens: 300,
         n: 1,
-        size: "512x512"
+        stream: false
       }
       this.selectedType = selectedType;
       this.selectedTags = selectedTags;
+      this.name = name;
+      this.userInput = userInput;
       this.submitted = true;
 
-      const response = await fetch('https://api.openai.com/v1/images/generations', {
+      const response = await fetch('https://api.openai.com/v1/completions', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

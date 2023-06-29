@@ -1,9 +1,10 @@
 <template>
     <div class="results-container" >
-        <h2 class="results-container__title">Your Inspiration:</h2>
+        <h2 class="results-container__title">Your Prayer:</h2>
         <div v-show="loading" class="spinner"></div>
+            {{ inspirationText }}
         <div v-show="loaded" class="results-image">
-            <img :src="inspirationUrl" >
+
         </div>
     </div>
 </template>
@@ -11,13 +12,15 @@
 <script>
 export default {
     name: "ResultsContainer",
-    props: ["inspirationUrl", "loading", "loaded", "selectedRoom", "selectedTags"]
+    props: ["inspirationText", "loading", "loaded", "selectedRoom", "selectedTags"]
 }
 </script>
 
 <style>
 .results-container {
-    padding: 3rem 0 0;
+    padding: 3rem 2rem 0;
+    white-space: pre-wrap;
+    text-align: left
 }
 
 .results-container__title {
